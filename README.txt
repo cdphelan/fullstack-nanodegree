@@ -5,4 +5,4 @@ Note: you must have Python installed on your computer to run this code. If you d
 To run this code:
 1. Download code from Github, making sure that all files remain in the same directory.
 2. Open Terminal/command line and navigate to the directory where the files are stored.
-3. Run entertainment_center.py. This will create an HTML page and open the page in your default browser.
+3. Run entertainment_center.py from Terminal/command line to run the app. This will create an HTML page and open the page in your default browser.
