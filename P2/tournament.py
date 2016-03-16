@@ -8,31 +8,30 @@ import re
 from itertools import izip
 
 
-def connect():
+def connect(db_name="tournament"):
     """Connect to the PostgreSQL database.  Returns a database connection."""
-    return psycopg2.connect("dbname=tournament")
+    conn = psycopg2.connect("dbname={}".format(db_name))
+    cursor = conn.cursor()
+    return conn, cursor
 
 
 def deleteMatches():
     """Remove all the match records from the database."""
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     c.execute("DELETE FROM matches;")
     conn.commit() 
     conn.close()
 
 def deletePlayers():
     """Remove all the player records from the database."""
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     c.execute("DELETE FROM players;")
     conn.commit() 
     conn.close()
 
 def countPlayers():
     """Returns the number of players currently registered."""
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     c.execute("SELECT COUNT(*) from players;")
     result = c.fetchone() #retrieves 1 result since only produce 1
     conn.commit() 
@@ -48,8 +47,7 @@ def registerPlayer(fname):
     Args:
       name: the player's full name (need not be unique).
     """
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     #prevent SQL injection:
     c.execute("INSERT INTO players(name) VALUES (%s);", (fname,))
 
@@ -69,41 +67,7 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    conn = connect()
-    c = conn.cursor()
-
-    #get rid of old rankings
-    c.execute("DROP VIEW rankings;")
-    c.execute("DROP VIEW match_count;")
-    c.execute("DROP VIEW loss_count;")
-    c.execute("DROP VIEW win_count;")
-
-    #update rankings
-    ## rankings calculated by counting the win rate, i.e. the number of times 
-    ## the player id appears in the matches db winner column and dividing by 
-    ## the total number of matches (appears in winner column + loser column)
-    c.execute("CREATE VIEW win_count AS\
-                SELECT players.id, players.name, count(matches.winner) AS wins\
-                FROM players LEFT JOIN matches\
-                ON players.id = matches.winner\
-                GROUP BY players.id;")
-    c.execute("CREATE VIEW loss_count AS\
-                SELECT players.id, players.name, count(matches.loser) AS losses\
-                FROM players LEFT JOIN matches\
-                    ON players.id = matches.loser\
-                GROUP BY players.id;")
-    c.execute("CREATE VIEW match_count AS\
-                SELECT win_count.id, SUM(loss_count.losses + win_count.wins) AS\
-                match_num\
-                FROM win_count LEFT JOIN loss_count\
-                ON win_count.id=loss_count.id\
-                GROUP BY win_count.id;")
-    c.execute("CREATE VIEW rankings AS\
-                SELECT win_count.id,win_count.name,win_count.wins,\
-                match_count.match_num AS match_num\
-                FROM win_count LEFT JOIN match_count\
-                ON win_count.id=match_count.id\
-                ORDER BY win_count.wins DESC;")
+    conn, c = connect()
     c.execute("SELECT * FROM rankings;")
     result = c.fetchall()
     conn.commit() 
@@ -118,10 +82,9 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
-    conn = connect()
-    c = conn.cursor()
-    c.execute("INSERT INTO matches(winner,loser) VALUES ("+str(winner)+","+
-        str(loser)+");") 
+    conn, c = connect()
+    c.execute("INSERT INTO matches(winner,loser) VALUES (%s,%s);",\
+        (str(winner),str(loser))) 
     conn.commit() 
     conn.close()
  
@@ -140,8 +103,7 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    conn = connect()
-    c = conn.cursor()
+    conn, c = connect()
     #select players, order by win, then randomly
     c.execute("SELECT id,name FROM rankings ORDER BY wins, RANDOM();")
     result = c.fetchall()
