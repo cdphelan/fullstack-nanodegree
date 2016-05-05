@@ -1,0 +1,22 @@
+<div class='menu_container'>
+	<div class='genre_container'>
+		<a href="{{ url_for('showGenres') }}">
+			Show All Genres
+		</a>
+	</div>
+
+	{% if genres|length > 0 %}		
+	
+			{% for g in genres %}
+				<div class='genre_container {{g.name}}'>
+					<a href="{{ url_for('showSubgenres', genre_id = g.id) }}">{{g.name}}</a>
+				</div>
+			{% endfor %}
+
+	{% else %}
+	<div class='genre_container'>
+		<p>No genres to display.</p>
+	</div>
+	{% endif %}
+
+</div>

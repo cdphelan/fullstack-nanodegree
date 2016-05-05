@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+	<div class='text_back'>
+		
+		<div class='small header'>
+			<h1>New Subgenre for {{genre_name}} apocalypses</h1>
+			<p>Enter new subgenre name.</p>
+		</div>
+
+		<div class='center_box'>
+			<form action="{{ url_for('newGenre', genre_id=genre_id) }}" method='post'>
+				<p>Name:
+				<input type='text' size='30' name='name'> 
+				<input type='submit' value='Create'>
+				</p>
+			</form>
+			<br>
+		</div>
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+
+<div class='container'>
+{% include "genre-menu.html" %}
+
+	<div class='pane'>
+		<div class='header'>
+			<h1>{{subgenre.name}} booklist</h1>
+		
+			{% if session.username %}
+			<div class='editdelete'>
+				<a href="{{url_for('newBook', subgenre_id = subgenre.id) }}">Add New Book</a>
+			</div>
+			{% endif %}
+		</div>
+		<div class='text_box'>
+
+			{% if items|length > 0 %}
+				<ol>
+				<table>
+				{% for i in items %}
+					<tr><td>
+					<li>{{i.name}} by {{i.author}} ({{i.pub_year}})</li>
+				
+					{% if i.description %}
+						<p class='desc'>{{i.description}}</p>
+					{% else %}
+						<br/>
+					{% endif %}
+				</td>
+
+				{% if session.username %}
+					<td width='60px'>
+						<div class='editdelete'>
+							<a href="{{url_for('editBook', subgenre_id = subgenre.id, book_id=i.id ) }}">Edit</a>
+							<a href="{{url_for('deleteBook', subgenre_id = subgenre.id, book_id=i.id ) }}">Delete</a>
+						</div>
+					</td>
+				{% endif %}
+
+				</tr>
+
+				{% endfor %}
+
+			{% else %}
+				<p>No books to display.</p>
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+{% endblock %}

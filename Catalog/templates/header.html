@@ -1,0 +1,23 @@
+<div id="heading">
+	<div id='title'>
+    <a href="{{ url_for('showGenres') }}"><h1>Choose your own apocalypse...</h1></a>
+  </div>
+
+	<div id='loginbutton'>
+		{% if not session.username %}
+			<a href="{{ url_for('showLogin') }}">Log in</a>
+		{% else %}
+			<a href="{{ url_for('gdisconnect') }}">Log out</a>
+		{% endif %}
+	</div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class='flash'>
+    {% for message in messages %}
+      {{message}}</br>
+    {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}

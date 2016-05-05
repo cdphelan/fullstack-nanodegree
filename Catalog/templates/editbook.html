@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class='text_back'>
+		<div class='small header'>
+			<h1>Edit Book</h1>
+		</div>
+	
+		<div class='text_box'>
+			<form action="{{ url_for('editBook', subgenre_id=subgenre_id, book_id=item.id )}}" method='post'>
+				<p>Name:</p>
+					<input type='text' size='30' name='name' placeholder='{{item.name}}'>
+				<p>Author:</p>
+					<input type='text' size='30' name='author' placeholder='{{item.author}}'>
+				<p>Year published:</p>
+					<input type='text' size='5' name='pub_year' placeholder='{{item.pub_year}}'>
+				<p>Description:</p>
+					<input type='text' size='90' name='description' placeholder='{{item.description}}'>
+
+
+				<input type='submit' value='Edit'>
+				<a href="{{url_for('showBooklist', subgenre_id = subgenre_id ) }}">Cancel</a>
+
+			</form>
+			<br>
+		</div>
+	</div>
+{% endblock %}

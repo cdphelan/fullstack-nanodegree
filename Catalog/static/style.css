@@ -1,0 +1,217 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #50514F;
+}
+
+/*catchall container for all not heading*/
+.container {
+    display: inline-block;
+    width: 100%;
+}
+
+/*container for left menu*/
+.menu_container {
+    width: 20%;
+    display: inline-block;
+}
+
+/*pane for genre displays*/
+.pane {
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
+    margin: 1em;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: #999999;
+    background-color: #333333;
+    padding: 10px;
+}
+
+/* pane for add/edit/del pages */
+.text_back {
+    background-color: #333333;
+    margin-top: 200px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px solid;
+    border-radius: 5px;
+    border-color: #999999;
+    background-color: #333333;
+    padding: 10px;
+}
+
+/* pane for booklist*/
+div.text_box {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+/*pane for login button*/
+.center_box {
+    text-align: center;
+}
+
+/*containers for individual genre boxes in left menu*/
+.genre_container {
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: white;
+    padding: 10px;
+    margin: 10px;
+    background-color: #333333;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.genre_container a {
+    color: white;
+}
+
+/*containers for individual subgenre boxes*/
+.subgenre_container {
+    display: inline-block;
+    height: 160px;
+    width: 200px;
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: white;
+    padding: 10px; 
+    margin: 5px;
+    overflow: auto;
+}
+
+.subgenre_container p {
+    font-size: .9em;
+    color: white;
+    margin: 3px;
+}
+
+.subgenre_container h2 {
+    font-size: 2em;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 1px;
+}
+
+p {
+    color: #CCCCCC;
+}
+
+a {
+    font-family: 'Titillium Web', sans-serif;   
+    text-decoration: none;
+    color: white;
+}
+
+li {
+    color: white;
+}
+
+td {
+    vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: white;
+}
+
+h1 {
+    font-family: 'Titillium Web', sans-serif; 
+    font-weight: 400;  
+    margin: 0;
+    border-bottom: 2px solid #eee;
+}
+
+hr {
+    margin: 0px;
+}
+
+p.desc {
+    font-size: .9em;
+    color: #CCCCCC;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.editdelete {
+    font-size: .8em;
+}
+
+.editdelete a {
+    color: #CCCCCC;
+}
+
+.bookinfo {
+    display: inline-block;
+    float: left;
+}
+
+/* all flashed messages */
+.flash {
+    background-color: #CCCCCC;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px; 
+    margin-left: 40%;
+    margin-right: 40%;
+    text-align: center;
+    font-size: .75em; 
+}
+
+#heading {
+    border-bottom: 2px solid #eee;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+/* site name */
+#title {
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+#title h1 {
+    font-weight: 700;  
+    border-bottom: 0px;
+}
+
+/* login button in header */
+#loginbutton {
+    border: 2px solid;
+    border-radius: 5px;
+    border-color: #CCCCCC;
+    padding: 5px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px;
+    background-color: #333333;
+    display: inline-block;
+    float: right;
+}
+
+/*background colors for genre containers*/
+.Human {
+    background-color: #95190C;
+}
+
+.Natural {
+    background-color: #107E7D;
+}
+
+.Supernatural {
+    background-color: #610345;
+}
+
+.Unexplained {
+    background-color: #044B7F;
+}
+

@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class='text_back'>
+		<div class='small header'>
+			<h2> Are you sure you want to delete {{item.name}}? </h2>
+		</div>
+
+		<div class='center_box'>
+			<form action="{{ url_for('deleteGenre', subgenre_id = item.id)}}" method = 'post'>
+				<input type='submit', value = 'Delete'>
+			</form>
+
+			<a href = "{{ url_for('showGenres')}}"> Cancel </a>
+			<br>
+			<br>
+		</div>
+
+	</div>
+{% endblock %}

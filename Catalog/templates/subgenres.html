@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<div class='container'>
+{% include "genre-menu.html" %}
+
+	<div class='pane'>
+		<div class='header'>
+			<h1>{{genre.name}}</h1>
+			<p>Click on a subgenre name to see the booklist.</p>
+			{% if session.username %}
+			<div class='editdelete'>
+				<a href="{{url_for('newGenre', genre_id = genre.id) }}">Add New Subgenre</a>
+			</div>
+			{% endif %}
+		</div>
+
+		{% if subgenres|length > 0 %}
+
+				{% for s in subgenres %}
+
+					<div class='subgenre_container {{s.genre.name}}'>
+						<p>{{s.genre.name}}</p>
+						<hr>
+						<h2><a href="{{ url_for('showBooklist', subgenre_id = s.id ) }}">{{s.name}}</a></h2>
+						{% if session.username %}
+						<div class='editdelete'>
+						<p>
+							<a href="{{url_for('editGenre', subgenre_id = s.id) }}">Edit</a>
+							<a href="{{url_for('deleteGenre', subgenre_id = s.id) }}">Delete</a>
+						</p>
+					</div>
+						{% endif %}
+					</div>
+				{% endfor %}
+
+		{% else %}
+			<p>No genres to display.</p>
+		{% endif %}
+
+	</div>
+
+
+</div>
+{% endblock %}

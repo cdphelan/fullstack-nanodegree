@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class='text_back'>
+		<div class='small header'>
+			<h1>Edit Subgenre</h1>
+		</div>
+
+		<div class='center_box'>
+			<form action="{{ url_for('editGenre', subgenre_id=subgenre_id) }}" method='post'>
+				<p>Name:
+				<input type='text' size='30' name='name' placeholder='{{item.name}}'>
+				<input type='submit' value='Edit'>
+				<a href="{{url_for('showGenres') }}">Cancel</a> </p>
+			</form>
+			<br>
+		</div>
+
+	</div>
+
+{% endblock %}
